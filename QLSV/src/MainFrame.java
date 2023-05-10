@@ -1,6 +1,8 @@
 import org.jdatepicker.impl.SqlDateModel;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.UtilDateModel;
+
 import java.awt.BorderLayout;
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -22,8 +24,8 @@ public class MainFrame extends JFrame implements ActionListener {
 
     JFrame frame;
     JTextField jtf1, jtf2, jtf3, jtf4, jtf5,
-            jtf6, jtf7, jtf8, jtf9, jtf10, jtf11, jtfSearch;
-    JTable tb;
+            jtf6, jtf7, jtf8, jtf9, jtf10, jtf11,jtf12,jtf13,jtf14,jtf15,jtf16, jtfSearch;
+    JTable tb,tb1;
 
 
 
@@ -32,7 +34,7 @@ public class MainFrame extends JFrame implements ActionListener {
     Vector vttitle = new Vector();
     Vector vtdata = new Vector();
     String[] tbl = {"Họ và tên", "Mã SV", "Ngày sinh", "Mã Lớp", "Khoa", "Ngành", "Tên ĐT", "Mã số ĐT", "TGTH", "Tiến Độ", "GVHD", "Kinh phí"};
-
+    String[] tbl1 = {"Họ và tên","Mã GV","Ngày Sinh","Khoa","Ngành"};
     DefaultTableModel model;
 
     JButton hoten, lop, khoa, nganh,
@@ -55,14 +57,66 @@ public class MainFrame extends JFrame implements ActionListener {
         //Tạo 1 panel hiển thị thông tin người quản lý
 
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(1,2));
+        panel.setLayout(new GridLayout(1,1));
 
+
+        //viền bao quanh thông tin
         JPanel panelInf = new JPanel();
         Border borderInf = BorderFactory.createLineBorder(Color.black);
         TitledBorder titledBorderInf = BorderFactory.createTitledBorder(borderInf, "");
         panelInf.setBorder(titledBorderInf);
         panel.add(panelInf);
         panelInf.setLayout(new BoxLayout(panelInf, BoxLayout.Y_AXIS));
+
+
+
+        //panel chứa thông tin giáo viên quản lý
+        JPanel ql = new JPanel();
+        Border borderql = BorderFactory.createLineBorder(Color.BLUE);
+        TitledBorder titledBorderql = BorderFactory.createTitledBorder(borderql, "Thông tin người quản lý");
+        ql.setBorder(titledBorderql);
+        panelInf.add(ql);
+        ql.setLayout(new BorderLayout());
+
+
+
+        //dòng dữ liệu ng quản lý
+        JPanel p01 = new JPanel();
+        Border border01 = BorderFactory.createLineBorder(Color.black);
+        TitledBorder titledBorder01 = BorderFactory.createTitledBorder(border01, "");
+        p01.setBorder(titledBorder01);
+        ql.add(p01, BorderLayout.WEST);
+        p01.setLayout(new GridLayout(5, 1));
+
+        JLabel jlb1 = new JLabel("Họ và tên");            p01.add(jlb1);
+        JLabel jlb2 = new JLabel("Mã GV");                p01.add(jlb2);
+        JLabel jlb = new JLabel("Ngày sinh");             p01.add(jlb);
+        JLabel jlb4 = new JLabel("Khoa");                 p01.add(jlb4);
+        JLabel jlb5 = new JLabel("Ngành");                p01.add(jlb5);
+
+        JPanel p02 = new JPanel();
+        Border border02 = BorderFactory.createLineBorder(Color.black);
+        TitledBorder titledBorder02 = BorderFactory.createTitledBorder(border02, "");
+        p02.setBorder(titledBorder02);
+        ql.add(p02, BorderLayout.CENTER);
+        p02.setLayout(new GridLayout(6, 1));
+
+        jtf12 = new JTextField(20);          p02.add(jtf12);
+        jtf13 = new JTextField(20);          p02.add(jtf13);
+
+
+
+
+        SqlDateModel dateModel = new SqlDateModel();
+        JDatePanelImpl datePanel = new JDatePanelImpl(dateModel,new Properties());
+        AbstractFormatter formatter = new SqlDateFormatter(new SimpleDateFormat("yyyy-MM-dd"));
+        birthday = new JDatePickerImpl(datePanel,formatter);
+        p02.add(birthday);
+
+        jtf14 = new JTextField(20);          p02.add(jtf14);
+        jtf15 = new JTextField(20);          p02.add(jtf15);
+        jtf16 = new JTextField(20);          p02.add(jtf16);
+
 
         //Tạo 1 panel hiển thi thông tin cần quản lý
         JPanel panel1 = new JPanel();
@@ -79,7 +133,7 @@ public class MainFrame extends JFrame implements ActionListener {
         panel1.add(p1);
         p1.setLayout(new BorderLayout());
 
-
+        //bảnh hiển thị dng dữ liệu sinh viên
         JPanel p11 = new JPanel();
         Border border11 = BorderFactory.createLineBorder(Color.black);
         TitledBorder titledBorder11 = BorderFactory.createTitledBorder(border11, "");
@@ -87,13 +141,16 @@ public class MainFrame extends JFrame implements ActionListener {
         p1.add(p11, BorderLayout.WEST);
         p11.setLayout(new GridLayout(6, 1));
 
-        JLabel jlb1 = new JLabel("Họ và tên         ");   p11.add(jlb1);
-        JLabel jlb2 = new JLabel("Mã SV");                p11.add(jlb2);
-        JLabel jlb = new JLabel("Ngày sinh");             p11.add(jlb);
-        JLabel jlb3 = new JLabel("Mã Lớp");               p11.add(jlb3);
-        JLabel jlb4 = new JLabel("Khoa");                 p11.add(jlb4);
-        JLabel jlb5 = new JLabel("Ngành");                p11.add(jlb5);
+        JLabel jlb6 = new JLabel("Họ và tên");             p11.add(jlb6);
+        JLabel jlb7 = new JLabel("Mã SV");                 p11.add(jlb7);
+        JLabel jlb8 = new JLabel("Ngày sinh");             p11.add(jlb8);
+        JLabel jlb9 = new JLabel("Mã Lớp");                p11.add(jlb9);
+        JLabel jlb10 = new JLabel("Khoa");                 p11.add(jlb10);
+        JLabel jlb11 = new JLabel("Ngành");                p11.add(jlb11);
 
+
+
+        //cột nhập dữ liệu
         JPanel p12 = new JPanel();
         Border border12 = BorderFactory.createLineBorder(Color.black);
         TitledBorder titledBorder12 = BorderFactory.createTitledBorder(border12, "");
@@ -104,11 +161,19 @@ public class MainFrame extends JFrame implements ActionListener {
         jtf1 = new JTextField(20);          p12.add(jtf1);
         jtf2 = new JTextField(20);          p12.add(jtf2);
 
-        SqlDateModel dateModel = new SqlDateModel();
-		JDatePanelImpl datePanel = new JDatePanelImpl(dateModel,new Properties());
-        AbstractFormatter formatter = new DateFormatter(new SimpleDateFormat("yyyy-MM-dd"));
-		birthday = new JDatePickerImpl(datePanel,formatter);
-		p12.add(birthday);
+
+
+
+
+//        SqlDateModel dateModel1 = new SqlDateModel();
+//		JDatePanelImpl datePanel1 = new JDatePanelImpl(dateModel1,new Properties());
+//        AbstractFormatter formatter1 = new DateFormatter(new SimpleDateFormat("yyyy-MM-dd"));
+
+        SqlDateModel dateModel1 = new SqlDateModel();
+        JDatePanelImpl datePanel1 = new JDatePanelImpl(dateModel1,new Properties());
+        AbstractFormatter formatter1 = new SqlDateFormatter(new SimpleDateFormat("yyyy-MM-dd"));
+		JDatePickerImpl birthday1 = new JDatePickerImpl(datePanel1,formatter1);
+		p12.add(birthday1);
 
         jtf3 = new JTextField(20);          p12.add(jtf3);
         jtf4 = new JTextField(20);          p12.add(jtf4);
@@ -122,7 +187,7 @@ public class MainFrame extends JFrame implements ActionListener {
         panel1.add(p2);
         p2.setLayout(new BorderLayout());
 
-
+        //tên coojt dữ liệu đề tài
         JPanel p21 = new JPanel();
         Border border21 = BorderFactory.createLineBorder(Color.black);
         TitledBorder titledBorder21 = BorderFactory.createTitledBorder(border21, "");
@@ -130,14 +195,14 @@ public class MainFrame extends JFrame implements ActionListener {
         p2.add(p21, BorderLayout.WEST);
         p21.setLayout(new GridLayout(6, 1));
 
-        JLabel jlb6 = new JLabel("Tên ĐT");           p21.add(jlb6);
-        JLabel jlb7 = new JLabel("Mã Số ĐT");         p21.add(jlb7);
-        JLabel jlb8 = new JLabel("TGTH (tháng)");     p21.add(jlb8);
-        JLabel jlb10 = new JLabel("Tiến Độ");         p21.add(jlb10);
-        JLabel jlb9 = new JLabel("GVHD");             p21.add(jlb9);
-        JLabel jlb11 = new JLabel("Kinh phí (VNĐ)");  p21.add(jlb11);
+        JLabel jlb12 = new JLabel("Tên ĐT");           p21.add(jlb12);
+        JLabel jlb13 = new JLabel("Mã Số ĐT");         p21.add(jlb13);
+        JLabel jlb14 = new JLabel("TGTH (tháng)");     p21.add(jlb14);
+        JLabel jlb15 = new JLabel("Tiến Độ");         p21.add(jlb15);
+        JLabel jlb16 = new JLabel("GVHD");             p21.add(jlb16);
+        JLabel jlb17 = new JLabel("Kinh phí (VNĐ)");  p21.add(jlb17);
 
-
+        //vùng nhập dữ liệu đề tài
         JPanel p22 = new JPanel();
         Border border22 = BorderFactory.createLineBorder(Color.black);
         TitledBorder titledBorder22 = BorderFactory.createTitledBorder(border22, "");
@@ -190,7 +255,8 @@ public class MainFrame extends JFrame implements ActionListener {
         p4.setLayout(new BoxLayout(p4, BoxLayout.X_AXIS));
 
 
-        //tạo bảng
+        //tạo bảng hiển thị dữ liệu
+        //bảng sinh viên
         JPanel ptb1 = new JPanel();
         Border bordertbl1 = BorderFactory.createLineBorder(Color.BLACK);
         TitledBorder titledBordertbl1 = BorderFactory.createTitledBorder(bordertbl1, "Danh sách");
@@ -201,8 +267,20 @@ public class MainFrame extends JFrame implements ActionListener {
         load();
         tb = new JTable(model);
         tb.setAutoResizeMode(JTable.AUTO_RESIZE_NEXT_COLUMN);
-        JScrollPane sc = new JScrollPane(tb);
-        ptb1.add(sc);
+        JScrollPane sc1 = new JScrollPane(tb);
+        ptb1.add(sc1);
+        //bảng giáo viên
+//        JPanel ptb2 = new JPanel();
+//        Border bordertbl2 = BorderFactory.createLineBorder(Color.BLACK);
+//        TitledBorder titledBordertbl2 = BorderFactory.createTitledBorder(bordertbl2, "Danh sách");
+//        ptb2.setBorder(titledBordertbl2);
+//        panelInf.add(ptb2);
+//        ptb2.setLayout(new BorderLayout());
+//        model = new DefaultTableModel(vtdata,vttitle);
+//        load1();
+//        tb1 = new JTable(model);
+//        JScrollPane sc2 = new JScrollPane();
+
 
         JButton Statistical = new JButton("Statistical", new ImageIcon("Statistical.png"));
         panel1.add(Statistical, BorderLayout.PAGE_END);
@@ -211,6 +289,7 @@ public class MainFrame extends JFrame implements ActionListener {
         JTabbedPane myTabled = new JTabbedPane();
         myTabled.add(panel, "Thông tin người quản lý");
         myTabled.add(panel1, "Hệ thống quản lý");
+//      myTabled.add(panel2,"Đề tài tự chọn");
         Container con = getContentPane();
         con.add(myTabled);
 
@@ -233,9 +312,9 @@ public class MainFrame extends JFrame implements ActionListener {
 					String dt = tb.getModel().getValueAt(tb.getSelectedRow(), 2).toString();
 					SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 					java.util.Date date = dateFormat.parse(dt);
-					Date sqlDate = new Date(date.getTime());
+                    java.sql.Date sqlDate = new java.sql.Date(date.getTime());
 					dateModel.setValue(sqlDate);
-				} catch (ParseException e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
             }
@@ -246,6 +325,8 @@ public class MainFrame extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
         setVisible(true);
     }
+
+
 
     public void reload() {
         jtf1.setText("");
@@ -259,11 +340,17 @@ public class MainFrame extends JFrame implements ActionListener {
         jtf10.setText("");
         jtf9.setText("");
         jtf11.setText("");
+        jtf12.setText("");
+        jtf13.setText("");
+        jtf14.setText("");
+        jtf15.setText("");
+        jtf16.setText("");
         birthday.getModel().setValue(null);
         jtfSearch.setText("");
     }
 
     //Hàm cho dữ liệu từ database vào table
+    // cho dữ liệu sv từ database vào table
     public void load() {
         try {
             String sql = ("SELECT * FROM SinhVien join DeTai on SinhVien.MaSV = DeTai.MaSV ");
@@ -287,6 +374,30 @@ public class MainFrame extends JFrame implements ActionListener {
             System.out.println(e.getMessage());
         }
     }
+    //cho dữ liệu giáo viên từ database vào table
+//    public void load1(){
+//        try{
+//            String sql = ("SELECT * FROM GVHD");
+//            Statement st = conn.getConnection().createStatement();
+//            ResultSet rs = st.executeQuery(sql);
+//            vttitle.clear();
+//            vtdata.clear();
+//            int num_column = tbl1.length;
+//            for (int i = 0; i < num_column; i++) {
+//                vttitle.add(tbl1[i]);
+//            }
+//            while (rs.next()) {
+//                Vector row = new Vector();
+//                for (int i = 1; i <= num_column; i++) {
+//                    row.addElement(rs.getString(i));
+//                }
+//                vtdata.add(row);
+//            }
+//            model.setDataVector(vtdata, vttitle);
+//        }catch (Exception e){
+//            System.out.println(e.getMessage());
+//        }
+//    }
 
     //Hàm kiểm tra xem có trùng mã sinh viên khi thêm vào không
     public boolean ktmasv(String MaSV) {
@@ -317,9 +428,9 @@ public class MainFrame extends JFrame implements ActionListener {
     //Thêm thông tin vào table
     public void insert() {
         try {
-            String sql1 = ("INSERT INTO SinhVien (HoTen,MaSV,NgSinh,MaLop,Khoa,Nganh) VALUES (?, ?, ?, ?, ?, ?)");
+            String sql1 = ("INSERT INTO SinhVien (HoTen,MaSV,NgaySinh,MaLop,Khoa,Nganh) VALUES (?, ?, ?, ?, ?, ?)");
             PreparedStatement ps = conn.getConnection().prepareStatement(sql1);
-            String sql2 = ("INSERT INTO DeTai (MaSV,TenDT,MaSoDT,TGTH,TienDo,GVHD,KinhPhi) VALUES (?, ?, ?, ?, ?, ?, ?)");
+            String sql2 = ("INSERT INTO DeTai (MaSV,TenDT,MaSoDT,TGTH,TienDo,MaGV,KinhPhi) VALUES (?, ?, ?, ?, ?, ?, ?)");
             PreparedStatement ps1 = conn.getConnection().prepareStatement(sql2);
             if (checkBlank()) {
                 JOptionPane.showMessageDialog(this, "Không được để trống!");
@@ -336,7 +447,6 @@ public class MainFrame extends JFrame implements ActionListener {
                     ps.setString(4, jtf3.getText());
                     ps.setString(5, jtf4.getText());
                     ps.setString(6, jtf5.getText());
-
                     ps1.setString(1, jtf2.getText());
                     ps1.setString(2, jtf6.getText());
                     ps1.setString(3, jtf7.getText());
@@ -501,6 +611,11 @@ public class MainFrame extends JFrame implements ActionListener {
         }
     }
 
+
+
+
+
+
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
             case "Add":
@@ -570,6 +685,10 @@ public class MainFrame extends JFrame implements ActionListener {
                 jtf9.getText().isBlank();
     }
 
+
+
+
+    // sắp xếp theo yêu cầu
     public void Sort() {
         JFrame fr = new JFrame("Bạn muốn sắp xếp theo?");
         JPanel pn = new JPanel();
