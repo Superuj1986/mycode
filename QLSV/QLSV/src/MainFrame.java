@@ -20,11 +20,12 @@ public class MainFrame extends JFrame implements ActionListener {
     connect conn = new connect();
 
     JFrame frame;
-    JTextField jtf1, jtf2, jtf3, jtf4, jtf5, jtf6, jtf7, jtf8, jtf9, jtf10, jtf11, jtf12, jtf13, jtf14, jtf15, jtf16, jtfSearch;
+    JTextField Masv, Tensv, Malopsv, Khoasv, Nganhsv, Madt, Tendt, Tgth, Tiendo, Dtmagv, Kinhphi, Magv, Tengv, Khoagv, Nganhgv, timkiem;
+//    JTextField MaSV, Tensv, Ngsinh,Malop, Khoa, Nganh, Madt, Tendt, TGTH, Tiendo, GVHD, Kinhphi, Tengv, Dategv, Khoagv, Nganhgv;
     JTable tb, tb1;
 
-    JDatePickerImpl birthday;
-    JDatePickerImpl inputBirthday;
+    JDatePickerImpl ngsinhgv;
+    JDatePickerImpl ngsinhsv;
 
     Vector vttitle = new Vector();
     Vector vtdata = new Vector();
@@ -53,17 +54,17 @@ public class MainFrame extends JFrame implements ActionListener {
 
         //Tạo 1 panel hiển thị thông tin người quản lý
 
-        JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(1, 1));
+        JPanel in4gv = new JPanel();
+        in4gv.setLayout(new GridLayout(1, 1));
 
 
         //viền bao quanh thông tin
-        JPanel panelInf = new JPanel();
+        JPanel in4 = new JPanel();
         Border borderInf = BorderFactory.createLineBorder(Color.black);
         TitledBorder titledBorderInf = BorderFactory.createTitledBorder(borderInf, "");
-        panelInf.setBorder(titledBorderInf);
-        panel.add(panelInf);
-        panelInf.setLayout(new BoxLayout(panelInf, BoxLayout.Y_AXIS));
+        in4.setBorder(titledBorderInf);
+        in4gv.add(in4);
+        in4.setLayout(new BoxLayout(in4, BoxLayout.Y_AXIS));
 
 
         //panel chứa thông tin giáo viên quản lý
@@ -71,7 +72,7 @@ public class MainFrame extends JFrame implements ActionListener {
         Border borderql = BorderFactory.createLineBorder(Color.BLUE);
         TitledBorder titledBorderql = BorderFactory.createTitledBorder(borderql, "Thông tin người quản lý");
         ql.setBorder(titledBorderql);
-        panelInf.add(ql);
+        in4.add(ql);
         ql.setLayout(new BorderLayout());
 
 
@@ -83,16 +84,16 @@ public class MainFrame extends JFrame implements ActionListener {
         ql.add(p01, BorderLayout.WEST);
         p01.setLayout(new GridLayout(5, 1));
 
-        JLabel jlb1 = new JLabel("Họ và tên");
-        p01.add(jlb1);
-        JLabel jlb2 = new JLabel("Mã GV");
-        p01.add(jlb2);
-        JLabel jlb = new JLabel("Ngày sinh");
-        p01.add(jlb);
-        JLabel jlb4 = new JLabel("Khoa");
-        p01.add(jlb4);
-        JLabel jlb5 = new JLabel("Ngành");
-        p01.add(jlb5);
+        JLabel magv = new JLabel("Mã GV");
+        p01.add(magv);
+        JLabel tengv = new JLabel("Họ và tên");
+        p01.add(tengv);
+        JLabel ngaysinhgv = new JLabel("Ngày sinh");
+        p01.add(ngaysinhgv);
+        JLabel khoagv = new JLabel("Khoa");
+        p01.add(khoagv);
+        JLabel nganhgv = new JLabel("Ngành");
+        p01.add(nganhgv);
 
         JPanel p02 = new JPanel();
         Border border02 = BorderFactory.createLineBorder(Color.black);
@@ -101,24 +102,22 @@ public class MainFrame extends JFrame implements ActionListener {
         ql.add(p02, BorderLayout.CENTER);
         p02.setLayout(new GridLayout(6, 1));
 
-        jtf12 = new JTextField(20);
-        p02.add(jtf12);
-        jtf13 = new JTextField(20);
-        p02.add(jtf13);
+        Magv = new JTextField(20);
+        p02.add(Magv);
+        Tengv = new JTextField(20);
+        p02.add(Tengv);
 
 
         SqlDateModel dateModel = new SqlDateModel();
         JDatePanelImpl datePanel = new JDatePanelImpl(dateModel, new Properties());
         AbstractFormatter formatter = new SqlDateFormatter(new SimpleDateFormat("yyyy-MM-dd"));
-        birthday = new JDatePickerImpl(datePanel, formatter);
-        p02.add(birthday);
+        ngsinhgv = new JDatePickerImpl(datePanel, formatter);
+        p02.add(ngsinhgv);
 
-        jtf14 = new JTextField(20);
-        p02.add(jtf14);
-        jtf15 = new JTextField(20);
-        p02.add(jtf15);
-        jtf16 = new JTextField(20);
-        p02.add(jtf16);
+        Khoagv = new JTextField(20);
+        p02.add(Khoagv);
+        Nganhgv = new JTextField(20);
+        p02.add(Nganhgv);
 
 
         //Tạo 1 panel hiển thi thông tin cần quản lý
@@ -144,21 +143,21 @@ public class MainFrame extends JFrame implements ActionListener {
         p1.add(p11, BorderLayout.WEST);
         p11.setLayout(new GridLayout(6, 1));
 
-        JLabel jlb6 = new JLabel("Mã SV");
-        p11.add(jlb6);
-        JLabel jlb7 = new JLabel("Họ tên");
-        p11.add(jlb7);
-        JLabel jlb8 = new JLabel("Ngày sinh");
-        p11.add(jlb8);
-        JLabel jlb9 = new JLabel("Mã Lớp");
-        p11.add(jlb9);
-        JLabel jlb10 = new JLabel("Khoa");
-        p11.add(jlb10);
-        JLabel jlb11 = new JLabel("Ngành");
-        p11.add(jlb11);
+        JLabel lbmasv = new JLabel("Mã SV");
+        p11.add(lbmasv);
+        JLabel lbtensv = new JLabel("Họ tên");
+        p11.add(lbtensv);
+        JLabel lbngsinhsv = new JLabel("Ngày sinh");
+        p11.add(lbngsinhsv);
+        JLabel lbmalop = new JLabel("Mã Lớp");
+        p11.add(lbmalop);
+        JLabel lbkhoasv = new JLabel("Khoa");
+        p11.add(lbkhoasv);
+        JLabel lbnganhsv = new JLabel("Ngành");
+        p11.add(lbnganhsv);
 
 
-        //cột nhập dữ liệu
+        //cột nhập dữ liệu sv
         JPanel p12 = new JPanel();
         Border border12 = BorderFactory.createLineBorder(Color.black);
         TitledBorder titledBorder12 = BorderFactory.createTitledBorder(border12, "");
@@ -166,10 +165,10 @@ public class MainFrame extends JFrame implements ActionListener {
         p1.add(p12, BorderLayout.CENTER);
         p12.setLayout(new GridLayout(6, 1));
 
-        jtf1 = new JTextField(20);
-        p12.add(jtf1);
-        jtf2 = new JTextField(20);
-        p12.add(jtf2);
+        Masv = new JTextField(20);
+        p12.add(Masv);
+        Tensv = new JTextField(20);
+        p12.add(Tensv);
 
 
 //        SqlDateModel dateModel1 = new SqlDateModel();
@@ -179,15 +178,15 @@ public class MainFrame extends JFrame implements ActionListener {
         SqlDateModel dateModel1 = new SqlDateModel();
         JDatePanelImpl datePanel1 = new JDatePanelImpl(dateModel1, new Properties());
         AbstractFormatter formatter1 = new SqlDateFormatter(new SimpleDateFormat("yyyy-MM-dd"));
-        inputBirthday = new JDatePickerImpl(datePanel1, formatter1);
-        p12.add(inputBirthday);
+        ngsinhsv = new JDatePickerImpl(datePanel1, formatter1);
+        p12.add(ngsinhsv);
 
-        jtf3 = new JTextField(20);
-        p12.add(jtf3);
-        jtf4 = new JTextField(20);
-        p12.add(jtf4);
-        jtf5 = new JTextField(20);
-        p12.add(jtf5);
+        Malopsv = new JTextField(20);
+        p12.add(Malopsv);
+        Khoasv = new JTextField(20);
+        p12.add(Khoasv);
+        Nganhsv = new JTextField(20);
+        p12.add(Nganhsv);
 
         //panel chứa thông tin đề tài của sinh viên
         JPanel p2 = new JPanel();
@@ -205,18 +204,18 @@ public class MainFrame extends JFrame implements ActionListener {
         p2.add(p21, BorderLayout.WEST);
         p21.setLayout(new GridLayout(6, 1));
 
-        JLabel jlb12 = new JLabel("Mã Số ĐT");
-        p21.add(jlb12);
-        JLabel jlb13 = new JLabel("Tên ĐT");
-        p21.add(jlb13);
-        JLabel jlb14 = new JLabel("TGTH (tháng)");
-        p21.add(jlb14);
-        JLabel jlb15 = new JLabel("Tiến Độ");
-        p21.add(jlb15);
-        JLabel jlb16 = new JLabel("Mã GV");
-        p21.add(jlb16);
-        JLabel jlb17 = new JLabel("Kinh phí (VNĐ)");
-        p21.add(jlb17);
+        JLabel lbmadt = new JLabel("Mã Số ĐT");
+        p21.add(lbmadt);
+        JLabel lbtendt = new JLabel("Tên ĐT");
+        p21.add(lbtendt);
+        JLabel lbtgth = new JLabel("TGTH (tháng)");
+        p21.add(lbtgth);
+        JLabel lbtiendo = new JLabel("Tiến Độ");
+        p21.add(lbtiendo);
+        JLabel lbmagv = new JLabel("Mã GV");
+        p21.add(lbmagv);
+        JLabel lbkinhphi = new JLabel("Kinh phí (VNĐ)");
+        p21.add(lbkinhphi);
 
         //vùng nhập dữ liệu đề tài
         JPanel p22 = new JPanel();
@@ -226,18 +225,18 @@ public class MainFrame extends JFrame implements ActionListener {
         p2.add(p22, BorderLayout.CENTER);
         p22.setLayout(new GridLayout(6, 1));
 
-        jtf6 = new JTextField(20);
-        p22.add(jtf6);
-        jtf7 = new JTextField(20);
-        p22.add(jtf7);
-        jtf8 = new JTextField(20);
-        p22.add(jtf8);
-        jtf10 = new JTextField(20);
-        p22.add(jtf10);
-        jtf9 = new JTextField(20);
-        p22.add(jtf9);
-        jtf11 = new JTextField(20);
-        p22.add(jtf11);
+        Madt = new JTextField(20);
+        p22.add(Madt);
+        Tendt = new JTextField(20);
+        p22.add(Tendt);
+        Tgth = new JTextField(20);
+        p22.add(Tgth);
+        Tiendo = new JTextField(20);
+        p22.add(Tiendo);
+        Dtmagv = new JTextField(20);
+        p22.add(Dtmagv);
+        Kinhphi = new JTextField(20);
+        p22.add(Kinhphi);
 
         //panel chứa thanh công cụ
         JPanel p3 = new JPanel();
@@ -271,8 +270,8 @@ public class MainFrame extends JFrame implements ActionListener {
         p3.add(p31, BorderLayout.NORTH);
         p31.setLayout(new BoxLayout(p31, BoxLayout.X_AXIS));
 
-        jtfSearch = new JTextField(20);
-        p31.add(jtfSearch);
+        timkiem = new JTextField(20);
+        p31.add(timkiem);
         JButton Search = new JButton("Search", new ImageIcon("search.png"));
         p31.add(Search);
         Search.addActionListener(this);
@@ -301,7 +300,7 @@ public class MainFrame extends JFrame implements ActionListener {
         Border bordertbl2 = BorderFactory.createLineBorder(Color.BLACK);
         TitledBorder titledBordertbl2 = BorderFactory.createTitledBorder(bordertbl2, "Danh sách");
         ptb2.setBorder(titledBordertbl2);
-        panelInf.add(ptb2);
+        in4.add(ptb2);
         ptb2.setLayout(new BorderLayout());
         defaultTableModel = new DefaultTableModel(vtdata1, vttitle1);
         load1();
@@ -314,7 +313,7 @@ public class MainFrame extends JFrame implements ActionListener {
         Statistical.addActionListener(this);
 
         JTabbedPane myTabled = new JTabbedPane();
-        myTabled.add(panel, "Thông tin người quản lý");
+        myTabled.add(in4, "Thông tin người quản lý");
         myTabled.add(panel1, "Hệ thống quản lý");
 //      myTabled.add(panel2,"Đề tài tự chọn");
         Container con = getContentPane();
@@ -324,17 +323,17 @@ public class MainFrame extends JFrame implements ActionListener {
         tb.getSelectionModel().addListSelectionListener(event -> {
             int row = tb.getSelectedRow();
             if (row >= 0) {
-                jtf1.setText(tb.getModel().getValueAt(row, 0).toString());
-                jtf2.setText(tb.getModel().getValueAt(row, 1).toString());
-                jtf3.setText(tb.getModel().getValueAt(row, 3).toString());
-                jtf4.setText(tb.getModel().getValueAt(row, 4).toString());
-                jtf5.setText(tb.getModel().getValueAt(row, 5).toString());
-                jtf6.setText(tb.getModel().getValueAt(row, 6).toString());
-                jtf7.setText(tb.getModel().getValueAt(row, 7).toString());
-                jtf8.setText(tb.getModel().getValueAt(row, 8).toString());
-                jtf10.setText(tb.getModel().getValueAt(row, 9).toString());
-                jtf9.setText(tb.getModel().getValueAt(row, 10).toString());
-                jtf11.setText(tb.getModel().getValueAt(row, 11).toString());
+                Masv.setText(tb.getModel().getValueAt(row, 0).toString());
+                Tensv.setText(tb.getModel().getValueAt(row, 1).toString());
+                Malopsv.setText(tb.getModel().getValueAt(row, 3).toString());
+                Khoasv.setText(tb.getModel().getValueAt(row, 4).toString());
+                Nganhsv.setText(tb.getModel().getValueAt(row, 5).toString());
+                Madt.setText(tb.getModel().getValueAt(row, 6).toString());
+                Tendt.setText(tb.getModel().getValueAt(row, 7).toString());
+                Tgth.setText(tb.getModel().getValueAt(row, 8).toString());
+                Tiendo.setText(tb.getModel().getValueAt(row, 9).toString());
+                Dtmagv.setText(tb.getModel().getValueAt(row, 10).toString());
+                Kinhphi.setText(tb.getModel().getValueAt(row, 11).toString());
                 try {
                     String dt = tb.getModel().getValueAt(tb.getSelectedRow(), 2).toString();
                     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -355,24 +354,24 @@ public class MainFrame extends JFrame implements ActionListener {
 
 
     public void reload() {
-        jtf1.setText("");
-        jtf2.setText("");
-        jtf3.setText("");
-        jtf4.setText("");
-        jtf5.setText("");
-        jtf6.setText("");
-        jtf7.setText("");
-        jtf8.setText("");
-        jtf10.setText("");
-        jtf9.setText("");
-        jtf11.setText("");
-        jtf12.setText("");
-        jtf13.setText("");
-        jtf14.setText("");
-        jtf15.setText("");
-        jtf16.setText("");
-        birthday.getModel().setValue(null);
-        jtfSearch.setText("");
+        Masv.setText("");
+        Tensv.setText("");
+        Malopsv.setText("");
+        Khoasv.setText("");
+        Nganhsv.setText("");
+        Madt.setText("");
+        Tendt.setText("");
+        Tgth.setText("");
+        Tiendo.setText("");
+        Dtmagv.setText("");
+        Kinhphi.setText("");
+        Magv.setText("");
+        Tengv.setText("");
+        Khoagv.setText("");
+        Nganhgv.setText("");
+        ngsinhgv.getModel().setValue(null);
+        ngsinhsv.getModel().setValue(null);
+        timkiem.setText("");
     }
 
     //Hàm cho dữ liệu từ database vào table
@@ -431,7 +430,7 @@ public class MainFrame extends JFrame implements ActionListener {
         try {
             String sql = ("SELECT MaSV FROM SinhVien WHERE MaSV = ?");
             PreparedStatement ps = conn.getConnection().prepareStatement(sql);
-            ps.setString(1, jtf1.getText());
+            ps.setString(1, Masv.getText());
             return ps.executeQuery().next();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -444,7 +443,7 @@ public class MainFrame extends JFrame implements ActionListener {
         try {
             String sql = ("SELECT MaSoDT FROM DeTai WHERE MaSoDT = ?");
             PreparedStatement ps = conn.getConnection().prepareStatement(sql);
-            ps.setString(1, jtf6.getText());
+            ps.setString(1, Madt.getText());
             return ps.executeQuery().next();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -457,30 +456,30 @@ public class MainFrame extends JFrame implements ActionListener {
         try {
             String sql1 = ("INSERT INTO SinhVien (MaSV,HoTen,NgaySinh,MaLop,Khoa,Nganh) VALUES (?, ?, ?, ?, ?, ?)");
             PreparedStatement ps = conn.getConnection().prepareStatement(sql1);
-            String sql2 = ("INSERT INTO DeTai (MaSV,TenDT,MaSoDT,TGTH,TienDo,MaGV,KinhPhi) VALUES (?, ?, ?, ?, ?, ?, ?)");
+            String sql2 = ("INSERT INTO DeTai (MaSoDT,TenDT,TGTH,TienDo,MaGV,KinhPhi,MaSV) VALUES (?, ?, ?, ?, ?, ?, ?)");
             PreparedStatement ps1 = conn.getConnection().prepareStatement(sql2);
             if (checkBlank()) {
                 JOptionPane.showMessageDialog(this, "Không được để trống!");
             } else {
-                if (ktmasv(jtf1.getText())) {
+                if (ktmasv(Masv.getText())) {
                     JOptionPane.showMessageDialog(this, "Mã sinh viên đã tồn tại rồi !");
-                    if (ktmasodt(jtf6.getText())) {
+                    if (ktmasodt(Madt.getText())) {
                         JOptionPane.showMessageDialog(this, "Mã đề tài đã tồn tại rồi !");
                     }
                 } else {
-                    ps.setString(1, jtf1.getText());
-                    ps.setString(2, jtf2.getText());
-                    ps.setDate(3, Date.valueOf(inputBirthday.getModel().getValue().toString()));
-                    ps.setString(4, jtf3.getText());
-                    ps.setString(5, jtf4.getText());
-                    ps.setString(6, jtf5.getText());
-                    ps1.setString(1, jtf2.getText());
-                    ps1.setString(2, jtf6.getText());
-                    ps1.setString(3, jtf7.getText());
-                    ps1.setString(4, jtf8.getText());
-                    ps1.setString(5, jtf10.getText());
-                    ps1.setString(6, jtf9.getText());
-                    ps1.setString(7, jtf11.getText());
+                    ps.setString(1, Masv.getText());
+                    ps.setString(2, Tensv.getText());
+                    ps.setDate(3, Date.valueOf(ngsinhsv.getModel().getValue().toString()));
+                    ps.setString(4, Malopsv.getText());
+                    ps.setString(5, Khoasv.getText());
+                    ps.setString(6, Nganhsv.getText());
+                    ps1.setString(1, Madt.getText());
+                    ps1.setString(2, Tendt.getText());
+                    ps1.setString(3, Tgth.getText());
+                    ps1.setString(4, Tiendo.getText());
+                    ps1.setString(5, Dtmagv.getText());
+                    ps1.setString(6, Kinhphi.getText());
+                    ps1.setString(7, Masv.getText());
 
                     int check = ps.executeUpdate();
                     int check1 = ps1.executeUpdate();
@@ -501,24 +500,24 @@ public class MainFrame extends JFrame implements ActionListener {
     //Cập nhật thông tin theo mã sinh viên
     public void editsv() {
         try {
-            String sql1 = ("UPDATE SinhVien SET HoTen = ?,  MaLop = ?,Khoa = ?, Nganh = ?, NgaySinh = ? WHERE MaSV = ?");
+            String sql1 = ("UPDATE SinhVien SET   MaLop = ?,HoTen = ?,NgaySinh = ? ,Khoa = ?, Nganh = ? WHERE MaSV = ?");
             PreparedStatement ps = conn.getConnection().prepareStatement(sql1);
             String sql2 = ("UPDATE DeTai SET MaSoDT = ?, TenDT = ?,  TGTH= ?, TienDo=?, MaGV = ?, KinhPhi = ? WHERE MaSV = ?");
             PreparedStatement ps1 = conn.getConnection().prepareStatement(sql2);
-            ps.setString(6, jtf1.getText());
-            ps.setString(3, jtf3.getText());  // ma lop
-            ps.setString(4, jtf4.getText());  //  khoa
-            ps.setString(5, jtf5.getText());  // nganh
-            ps.setDate(2, Date.valueOf(inputBirthday.getModel().getValue().toString())); // ngay sinh
-            ps.setString(1, jtf2.getText());  // ho ten
+            ps.setString(6, Masv.getText());
+            ps.setString(3, Malopsv.getText());  // ma lop
+            ps.setString(4, Khoasv.getText());  //  khoa
+            ps.setString(5, Nganhsv.getText());  // nganh
+            ps.setDate(2, Date.valueOf(ngsinhsv.getModel().getValue().toString())); // ngay sinh
+            ps.setString(1, Tensv.getText());  // ho ten
 
-            ps1.setString(1, jtf6.getText()); // ma dt
-            ps1.setString(2, jtf7.getText()); // ten dt
-            ps1.setString(3, jtf8.getText()); // tgth
-            ps1.setString(4, jtf10.getText()); // tien do
-            ps1.setString(5, jtf9.getText()); // gvhd
-            ps1.setString(6, jtf11.getText()); // kinh phi
-            ps1.setString(7, jtf1.getText());
+            ps1.setString(1, Madt.getText()); // ma dt
+            ps1.setString(2, Tendt.getText()); // ten dt
+            ps1.setString(3, Tgth.getText()); // tgth
+            ps1.setString(4, Tiendo.getText()); // tien do
+            ps1.setString(5, Dtmagv.getText()); // gvhd
+            ps1.setString(6, Kinhphi.getText()); // kinh phi
+            ps1.setString(7, Masv.getText());
             int check = ps.executeUpdate();
             int check1 = ps1.executeUpdate();
             if (check > 0) {
@@ -541,7 +540,7 @@ public class MainFrame extends JFrame implements ActionListener {
         try {
             String sql = ("DELETE FROM SinhVien WHERE MaSV = ?");
             PreparedStatement ps = conn.getConnection().prepareStatement(sql);
-            ps.setString(1, jtf1.getText());
+            ps.setString(1, Masv.getText());
             deletedtByMaSV();
             int check = ps.executeUpdate();
             if (check > 0) {
@@ -560,7 +559,7 @@ public class MainFrame extends JFrame implements ActionListener {
         try {
             String sql = "delete from DeTai where MaSV = ?";
             PreparedStatement ps = conn.getConnection().prepareStatement(sql);
-            ps.setString(1, jtf1.getText());
+            ps.setString(1, Masv.getText());
             int check = ps.executeUpdate();
             if (check > 0) {
                 load();
@@ -607,23 +606,23 @@ public class MainFrame extends JFrame implements ActionListener {
             PreparedStatement ps = conn.getConnection().prepareStatement(sql1);
             String sql2 = ("SELECT * FROM DeTai WHERE MaSV = ?");
             PreparedStatement ps1 = conn.getConnection().prepareStatement(sql2);
-            ps.setString(1, jtfSearch.getText());
-            ps1.setString(1, jtfSearch.getText());
+            ps.setString(1, timkiem.getText());
+            ps1.setString(1, timkiem.getText());
             ResultSet check = ps.executeQuery();
             ResultSet check1 = ps1.executeQuery();
             if (check.next()) {
                 if (check1.next()) {
-                    jtf1.setText(check.getString("MaSV"));
-                    jtf2.setText(check.getString("HoTen"));
-                    jtf3.setText(check.getString("MaLop"));
-                    jtf4.setText(check.getString("Khoa"));
-                    jtf5.setText(check.getString("Nganh"));
-                    jtf6.setText(check1.getString("MaSoDT"));
-                    jtf7.setText(check1.getString("TenDT"));
-                    jtf8.setText(check1.getString("TGTH"));
-                    jtf10.setText(check1.getString("TienDo"));
-                    jtf9.setText(check1.getString("MaGV"));
-                    jtf11.setText(check1.getString("KinhPhi"));
+                    Madt.setText(check.getString("MaSV"));
+                    Tendt.setText(check.getString("HoTen"));
+                    Malopsv.setText(check.getString("MaLop"));
+                    Khoasv.setText(check.getString("Khoa"));
+                    Nganhsv.setText(check.getString("Nganh"));
+                    Madt.setText(check1.getString("MaSoDT"));
+                    Tendt.setText(check1.getString("TenDT"));
+                    Tgth.setText(check1.getString("TGTH"));
+                    Tiendo.setText(check1.getString("TienDo"));
+                    Dtmagv.setText(check1.getString("MaGV"));
+                    Kinhphi.setText(check1.getString("KinhPhi"));
 
                     String dt = check.getString("NgaySinh");
                     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -636,7 +635,7 @@ public class MainFrame extends JFrame implements ActionListener {
                 }
             } else {
                 JOptionPane.showMessageDialog(this, "Không tồn tại mã sinh viên này!");
-                jtfSearch.setText("");
+                timkiem.setText("");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -654,16 +653,16 @@ public class MainFrame extends JFrame implements ActionListener {
                 break;
 
             case "Update":
-                if (!jtf2.getText().isBlank() && !jtf7.getText().isBlank()) {
+                if (!Masv.getText().isBlank() && !Madt.getText().isBlank()) {
                     editsv();
                 }
                 break;
 
             case "Delete":
-                if (!jtf2.getText().isBlank()) {
+                if (!Masv.getText().isBlank()) {
                     deletesv();
                 }
-                if (!jtf7.getText().isBlank()) {
+                if (!Madt.getText().isBlank()) {
                     deletedtByMaSV();
                 }
                 load();
@@ -703,15 +702,17 @@ public class MainFrame extends JFrame implements ActionListener {
     }
 
     private boolean checkBlank() {
-        return jtf1.getText().isBlank() ||
-                jtf2.getText().isBlank() ||
-                jtf3.getText().isBlank() ||
-                jtf4.getText().isBlank() ||
-                jtf5.getText().isBlank() ||
-                jtf6.getText().isBlank() ||
-                jtf7.getText().isBlank() ||
-                jtf8.getText().isBlank() ||
-                jtf9.getText().isBlank();
+        return Masv.getText().isBlank() ||
+                Tensv.getText().isBlank() ||
+                Malopsv.getText().isBlank() ||
+                Khoasv.getText().isBlank() ||
+                Nganhsv.getText().isBlank() ||
+                Madt.getText().isBlank() ||
+                Tendt.getText().isBlank() ||
+                Tgth.getText().isBlank() ||
+                Tiendo.getText().isBlank() ||
+                Dtmagv.getText().isBlank() ||
+                Kinhphi.getText().isBlank();
     }
 
 
